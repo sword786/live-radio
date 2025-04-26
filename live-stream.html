@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Live Audio Stream</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f0f4ff, #e0eaff);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .container {
+      background: #ffffffcc;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 2em;
+      color: #333;
+    }
+    .on-air {
+      display: inline-block;
+      background: #e53935;
+      color: white;
+      font-weight: bold;
+      padding: 5px 15px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 8px #e53935;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 8px #e53935; }
+      50% { box-shadow: 0 0 20px #e53935; }
+      100% { box-shadow: 0 0 8px #e53935; }
+    }
+    audio {
+      width: 100%;
+      max-width: 400px;
+      outline: none;
+    }
+    .footer {
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="on-air">🔴 LIVE ON AIR</div>
+    <h1>📻 Muthnabi Stream</h1>
+    <audio controls autoplay>
+      <source src="https://cast4.my-control-panel.com/proxy/muthnabi/stream" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+    <div class="footer">Streaming powered by <strong>FredFlix</strong></div>
+  </div>
+</body>
+</html>
