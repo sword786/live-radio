@@ -54,17 +54,58 @@
       font-size: 0.9em;
       color: #666;
     }
+    .booster {
+      margin-top: 20px;
+    }
+    .booster label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="on-air">🔴 LIVE ON AIR</div>
     <h1>📻 Muthnabi Stream</h1>
-    <audio controls autoplay>
+    
+    <audio id="audio" controls autoplay crossorigin="anonymous">
       <source src="https://cast4.my-control-panel.com/proxy/muthnabi/stream" type="audio/mpeg" />
       Your browser does not support the audio element.
     </audio>
-    <div class="footer">Streaming powered by <strong>FredFlix</strong></div>
+
+    <div class="booster">
+      <label for="volumeBoost">🔊 Boost Volume:</label>
+      <input type="range" id="volumeBoost" min="1" max="3" value="1" step="0.1" />
+      <span id="boostValue">1x</span>
+    </div>
+
+    <div class="footer">Streaming powered by <strong>TeamTest</strong></div>
   </div>
+
+  <script>
+    const audioElement = document.getElementById("audio");
+    const volumeBoost = document.getElementById("volumeBoost");
+    const boostValue = document.getElementById("boostValue");
+
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const source = audioContext.createMediaElementSource(audioElement);
+    const gainNode = audioContext.createGain();
+
+    source.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    volumeBoost.addEventListener("input", () => {
+      const gain = parseFloat(volumeBoost.value);
+      gainNode.gain.value = gain;
+      boostValue.textContent = gain.toFixed(1) + "x";
+    });
+
+    // Start audio context on user interaction
+    document.body.addEventListener("click", () => {
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+    });
+  </script>
 </body>
 </html>
